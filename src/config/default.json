@@ -1,0 +1,13 @@
+{
+    "database": {
+        "tableName" : "Links"
+    },
+    "server": {
+        "host": "localhost",
+        "port": "4000",
+        "protocol": "http"
+    },
+    "aws": {
+        "region": "us-east-1"
+    }
+}

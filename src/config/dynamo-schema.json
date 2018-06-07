@@ -1,0 +1,41 @@
+{
+    "AttributeDefinitions": [
+      {
+        "AttributeName": "hashId",
+        "AttributeType": "S"
+      },
+      {
+        "AttributeName": "url",
+        "AttributeType": "S"
+      }
+    ],
+    "KeySchema": [
+      {
+        "AttributeName": "hashId",
+        "KeyType": "HASH"
+      }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 1,
+      "WriteCapacityUnits": 1
+    },
+    "TableName": "",
+    "GlobalSecondaryIndexes": [
+      {
+        "IndexName": "url",
+        "KeySchema": [
+          {
+            "AttributeName": "url",
+            "KeyType": "HASH"
+          }
+        ],
+        "Projection": {
+          "ProjectionType": "KEYS_ONLY"
+        },
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 1,
+          "WriteCapacityUnits": 1
+        }
+      }
+    ]
+  }
