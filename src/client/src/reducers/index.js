@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
-import urlReducer from "./urlReducer";
+import shortLinkReducer from "./shortLinkReducer";
+import linkReducer from "./linkReducer";
 import errorReducer from "./errorReducer";
 
 
 const rootReducer = combineReducers({
-    url: urlReducer,
-    error: errorReducer
+    shortLink: shortLinkReducer,
+    error: errorReducer,
+    link: linkReducer
 })
 
 export default rootReducer;

@@ -9,7 +9,5 @@
     },
     "aws": {
         "region": "us-east-1"
-    },
-    "host": "http://localhost:4000",
-    "apiKeys": ["3dcb9ecf-bb0d-11e6-92a4-12d4cdc2b252"]
+    }
 }

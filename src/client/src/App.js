@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.css';
 
-import Shortener from './containers/Shortener';
+import MainApp from './containers/MainApp';
 // import Header from './components/common/Header';
 // import Footer from './components/common/Footer';
 
@@ -10,7 +10,7 @@ import Shortener from './containers/Shortener';
 class App extends Component {
   render() {
     return (
-      <Shortener />
+      <MainApp />
     );
   }
 }

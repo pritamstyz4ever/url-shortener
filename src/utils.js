@@ -15,7 +15,6 @@ function randomByte() {
     return randomBytes(1)[0] & 0x30;
 }
 
-module.exports = randomByte;
 function md5(item) {
     return crypto.createHash('md5').update(item).digest('hex');
 }
@@ -57,7 +56,6 @@ function isValidUrl(reqUrl, domain, configHost) {
     }
     return true;
 }
-
 
 // let hash = hashed("url-https://jobs.cisco.com/jobs/SearchJobs/?3_19_3=163&3_12_3=187");
 // console.log(hash)

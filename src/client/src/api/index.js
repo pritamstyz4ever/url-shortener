@@ -1,12 +1,26 @@
-import { BASE_URL } from "../helpers/constants";
-import * as ACTION from "../actions/action-types";
+import { X_API_KEY } from '../helpers/constants';
 
+
+//TODO : add authorization token in req
 export default class apiService {
-    static createShortUrl(url) {
+    static createShortUrl(link) {
         return fetch('/api/v1/link', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(url)
+            headers: { "Content-Type": "application/json", "x-api-key": X_API_KEY },
+            body: JSON.stringify(link)
+        })
+            .then(res => {
+                return res.json();
+            })
+            .catch(err => {
+                return err;
+            });
+    }
+
+    static getUrl(id) {
+        return fetch(`/api/v1/link/${id}`, {
+            method: "GET",
+            headers: { "x-api-key": X_API_KEY }
         })
             .then(res => {
                 return res.json();

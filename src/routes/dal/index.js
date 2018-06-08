@@ -14,7 +14,7 @@ var dynamoModel = {
     endDate: 'S',
     hashId: 'S',
     hits: 'N',
-    hash: 'S',
+    shortHash: 'S',
     url: 'S',
     createdDateTime: 'S'
 };
@@ -44,52 +44,75 @@ const docClient = new Dynamodb.DocumentClient({
     region: 'us-east-1'
 });
 
-const TABLE_NAME = config.database.tableName;
+const TABLE_NAME = config.database && config.database.tableName || 'Links';
 
 function create(item) {
+    console.log(item)
     return new Promise((resolve, reject) => {
-        const id = uuid.v4();
         const now = moment().format();
         const params = {
             TableName: TABLE_NAME,
-            Item: Object.assign({}, item),
+            Item: Object.assign({}, item, { createdDateTime: now }),
             ReturnConsumedCapacity: "TOTAL"
         }
         docClient.put(params).promise()
             .then((res) => {
-                log.logInfo(`Successfully inserted record ${id} to DynamoDB, capacity consumed ${res.ConsumedCapacity.CapacityUnits}`, req)
-                resolve({
-                    id: id,
-                    createdDateTime: now
-                });
+                console.log(`Successfully inserted record ${item.hashId} to DynamoDB, capacity consumed ${res.ConsumedCapacity.CapacityUnits}`)
+                console.log(res)
+                resolve(item);
             })
             .catch((err) => {
-                log.logError(`Error occured while inserting to DynamoDb ${err}`, req, err);
+                console.log(`Error occured while inserting to DynamoDb ${err}`, err);
                 reject(err);
             })
     })
 }
 
+function getByHashKey(id) {
+    var params = {
+        TableName: 'Table',
+        Key: {
+            HashKey: 'hashkey'
+        }
+    };
+    return documentClient.get(params).promise()
+        .then((res) => {
+            console.log(`Successfully fetched data from DynamoDB for id: ${id}`)
+            return res
+        })
+        .catch((err) => {
+            console.log(`Error occured while fetching data from DynamoDb ${err}`, err);
+            throw err;
+        })
+}
+
 function read(expression, value) {
     return new Promise((resolve, reject) => {
         let attribute = `:this_${expression}`
+        let expressionAttributeValuesObj = { }
+        console.log(value)
+        expressionAttributeValuesObj[attribute] = value;
         const params = {
             TableName: TABLE_NAME,
             FilterExpression: `${expression} = ${attribute}`,
-            ExpressionAttributeValues: { attribute: value }
+            ExpressionAttributeValues: expressionAttributeValuesObj
         }
+        console.log(params)
 
         docClient.scan(params).promise()
             .then((res) => {
-                log.logInfo(`Successfully fetched data from DynamoDB for id: ${item}`, req)
-                const response = res.Items.map(item => {
-                    return new Link(...item);
-                }).sort((s, b) => b.createdDateTime > s.createdDateTime);
-
-                resolve(response)
+                console.log(`Successfully fetched data from DynamoDB for id: ${value}`)
+                if (res.Count === 0) {
+                    console.log('No record found');
+                    resolve(undefined);
+                } else {
+                    console.log(res)
+                    const response = res.Items[0];
+                    resolve(response)
+                }
             })
             .catch((err) => {
-                log.logError(`Error occured while fetching data from DynamoDb ${err}`, req, err);
+                console.log(`Error occured while fetching data from DynamoDb ${err}`, err);
                 reject(err);
             })
     });
@@ -103,10 +126,15 @@ function queryByHashKey(column, value) {
             ":value": value
         }
     }
-    return docClient.query(params).promise().catch((err) => {
-        console.log("error", `error to query table : ${TABLE_NAME}, with params: ${column} = ${value} `, err.message);
-        return Promise.reject(err);
-    });
+    return docClient.query(params).promise()
+        .then((res) => {
+            console.log(res);
+            return res;
+        })
+        .catch((err) => {
+            console.log("error", `error to query table : ${TABLE_NAME}, with params: ${column} = ${value} `, err.message);
+            return Promise.reject(err);
+        });
 }
 
 

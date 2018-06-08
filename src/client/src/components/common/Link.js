@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 export default class Link extends Component {
     render() {
         return (
-            <div class="jumbotron">
+            <div className="jumbotron">
                 <h3><a href={this.props.link}>{this.props.link}</a></h3>
             </div>
         )

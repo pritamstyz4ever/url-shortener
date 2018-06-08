@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/action-types";
 
-const urlReducer = (state = {}, action) => {
+const shortLinkReducer = (state, action) => {
+  state = state || {}
   switch (action.type) {
     case actionTypes.SHORTEN_URL:
       return action.payload;
@@ -9,4 +10,4 @@ const urlReducer = (state = {}, action) => {
   }
 };
 
-export default urlReducer;
+export default shortLinkReducer;

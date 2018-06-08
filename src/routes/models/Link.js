@@ -4,8 +4,8 @@ class Link {
     constructor(id, url, hash, startDate, endDate) {
             this.hashId = id,
             this.url = url,
-            this.hash = hash,
-            this.starDate = startate,
+            this.shortHash = hash,
+            this.startDate = startDate,
             this.endDate = endDate
     }
 }
