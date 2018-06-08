@@ -1,36 +1,16 @@
 import React, { Component } from 'react';
+
 import './App.css';
 
+import Shortener from './containers/Shortener';
+// import Header from './components/common/Header';
+// import Footer from './components/common/Footer';
+
+
 class App extends Component {
-
-  handleOnClick() {
-
-  }
-
-  handleOnSumbit() {}
-
   render() {
     return (
-      <div className="App">
-        <div>
-          <header className="App-header">
-            {/* <img src={logo} className="App-logo" alt="logo" /> */}
-            <h1 className="App-title">Welcome to Simple Url Shortner</h1>
-            <h2 className="App-intro">Powered By React and Node JS and Bootstrap CSS</h2>
-          </header>
-        </div>
-        <div className="container">
-          <div class="jumbotron">
-            <h2>Paste URL to shorten:</h2>
-            <form enctype='application/json' action="/url" method="post" onSubmit={this.handleOnSumbit}>
-              <div class="form-group">
-                <input tabIndex="1" className="form-control -" type="text" placeholder="Url" value="https://jobs.cisco.com/jobs/SearchJobs/?3_19_3=163&3_12_3=187" />
-              </div>
-              <button type="submit" class="btn btn-default" onClick={() => this.handleOnClick}>Shorten</button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Shortener />
     );
   }
 }
