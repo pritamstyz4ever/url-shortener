@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = Link;
-
 class Link {
     constructor(id, url, hash, startDate, endDate) {
             this.hashId = id,
@@ -11,3 +9,5 @@ class Link {
             this.endDate = endDate
     }
 }
+
+module.exports = Link;

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+
+  handleOnClick() {
+
+  }
+
+  handleOnSumbit() {}
+
   render() {
     return (
       <div className="App">
@@ -15,11 +22,11 @@ class App extends Component {
         <div className="container">
           <div class="jumbotron">
             <h2>Paste URL to shorten:</h2>
-            <form enctype='application/json' action="/url" method="post">
+            <form enctype='application/json' action="/url" method="post" onSubmit={this.handleOnSumbit}>
               <div class="form-group">
                 <input tabIndex="1" className="form-control -" type="text" placeholder="Url" value="https://jobs.cisco.com/jobs/SearchJobs/?3_19_3=163&3_12_3=187" />
               </div>
-              <button type="submit" class="btn btn-default">Shorten</button>
+              <button type="submit" class="btn btn-default" onClick={() => this.handleOnClick}>Shorten</button>
             </form>
           </div>
         </div>

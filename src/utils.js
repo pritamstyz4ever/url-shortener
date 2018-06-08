@@ -59,9 +59,9 @@ function isValidUrl(reqUrl, domain, configHost) {
 }
 
 
-let hash = hashed("url-https://jobs.cisco.com/jobs/SearchJobs/?3_19_3=163&3_12_3=187");
-console.log(hash)
-let enc = getUniqId();
-console.log(decode(enc))
-console.log(enc)
-console.log(hashed('hash-9p2LY'))
+// let hash = hashed("url-https://jobs.cisco.com/jobs/SearchJobs/?3_19_3=163&3_12_3=187");
+// console.log(hash)
+// let enc = getUniqId();
+// console.log(decode(enc))
+// console.log(enc)
+// console.log(hashed('hash-9p2LY'))

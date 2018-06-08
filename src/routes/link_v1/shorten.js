@@ -4,7 +4,7 @@ const dal = require('../dal')
 const Link = require('../models/Link')
 const utils = require('../../utils')
 
-module.exports = getShortUrl;
+module.exports = createShortUrl;
 
 function createShortUrl(req, res, next) {
     let url = req.body.url;

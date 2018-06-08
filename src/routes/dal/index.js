@@ -1,6 +1,6 @@
 'use strict';
 
-const Dynamodb = require("aws-sdk/client/dynamodb");
+const Dynamodb = require("aws-sdk/clients/dynamodb");
 const moment = require('moment');
 const Link = require('../models/Link')
 const config = require('config');
@@ -52,10 +52,7 @@ function create(item) {
         const now = moment().format();
         const params = {
             TableName: TABLE_NAME,
-            Item: {
-                ...item,
-                createdDateTime: now
-            },
+            Item: Object.assign({}, item),
             ReturnConsumedCapacity: "TOTAL"
         }
         docClient.put(params).promise()
@@ -124,7 +121,6 @@ function update(item) {
     return docClient.update(params).promise().catch(e => {
         console.log("error", `error to update table : ${tableName}, with params: keys = ${keys}, expression = ${expession}, expressionValues: = ${expressionValues} `, e.message);
     });
-}
 }
 
 function deleteObj(item) {
