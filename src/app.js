@@ -16,10 +16,6 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  if (req.headers['x-api-key'] || checkApiKey(req.headers['x-api-key'])){
+  if (req.headers['x-api-key'] || checkApiKey(req.headers['x-api-key'])) {
     next();
   } else {
     res.status(500).json({ Error: "Missing X-Api-Key" })
@@ -58,4 +54,7 @@ app.use(function (err, req, res, next) {
 function checkApiKey(apiKey) {
   return config.apiKeys.includes(apiKey)
 }
+app.listen(process.env.NODE_PORT || 4000, () => {
+  console.log("sever started at port", process.env.NODE_PORT || 4000)
+})
 module.exports = app;
