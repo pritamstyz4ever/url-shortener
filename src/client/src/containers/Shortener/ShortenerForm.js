@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { createShortUrl, getUrl } from "../../actions/action-creator";
-import Form from '../../components/common/Form';
 import ShortnerLink from './ShortenerLink';
 import Header from '../../components/common/Header';
 import Footer from '../../components/common/Footer';
 import validateInput from '../../validations/linkform';
-import { Redirect } from 'react-router-dom';
 
 class ShortenerForm extends Component {
     constructor(props) {
@@ -64,7 +62,7 @@ class ShortenerForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const { _id, link } = this.state;
+        const { link } = this.state;
         console.log(link)
         this.setState({ loading: true });
 
